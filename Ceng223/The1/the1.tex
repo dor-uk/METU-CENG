@@ -1,1 +1,188 @@
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{float}
+\usepackage{amsmath}
 
+\usepackage[hmargin=3cm,vmargin=6.0cm]{geometry}
+%\topmargin=0cm
+\topmargin=-2cm
+\addtolength{\textheight}{6.5cm}
+\addtolength{\textwidth}{2.0cm}
+%\setlength{\leftmargin}{-5cm}
+\setlength{\oddsidemargin}{0.0cm}
+\setlength{\evensidemargin}{0.0cm}
+
+%misc libraries goes here
+\usepackage{fitch}
+
+\begin{document}
+
+\section*{Student Information } 
+%Write your full name and id number between the colon and newline
+%Put one empty space character after colon and before newline
+Full Name : Doruk Berke Yurtsızoğlu \\
+Id Number : 2522225 \\
+
+% Write your answers below the section tags
+\section*{Answer 1}
+a.
+\begin{table}[ht]
+
+
+\begin{tabular}{|c|c|c|c|c|c|c|} 
+\hline 
+p & q & $p \land q$ & $\neg p$ & $\neg q$ & $(\neg p) \lor (\neg q)$ & $(p \land q) \iff (\neg p) \lor (\neg q)$ \\ [0.5ex] % inserts table
+%heading
+\hline\hline 
+T & T & T & F & F & F & F \\ % inserting body of the table
+\hline
+T & F & F & F & T & T & F \\
+\hline
+F & T & F & T & F & T & F \\
+\hline
+F & F & F & T & T & T & F \\
+\hline %inserts single line
+\end{tabular}
+\label{table:nonlin} % is used to refer this table in the text
+\end{table}
+\\
+The statement is a contradiction because the statement is false in every occasion. \\
+\\
+b.\\
+\\
+1. $ p \implies ((q \lor \neg q) \implies (p \land q))$ \\
+2. $ q \lor (\neg q) \equiv T$ \ \qquad \ \ \qquad \qquad \qquad \qquad \ \ Negation Laws \\
+3. $ T \implies (p \land q) \equiv F \lor (p \land q)$ \   \qquad \qquad     \   Table 7 Line 1 \\
+4. $ F \lor (p \land q) \equiv p \land q$ \ \qquad \ \ \qquad \qquad \qquad   Identity Laws \\
+5. $ p \implies p \land q \equiv (p \implies p) \land (p \implies q)$ \             Table 7 Line 6 \\
+6. $ (p \implies p) \equiv (\neg p) \lor p$ \ \qquad \qquad \ \qquad \ \ \       Table 7 Line 1 \\
+7. $ (\neg p) \lor p \equiv T$  \ \ \qquad \ \ \qquad \qquad \qquad \qquad \ Negation Laws \\
+8. $ T \land (p \implies q) \equiv p \implies q$    \qquad \qquad \qquad        Identity Laws \\
+9. $ p \implies q \equiv (\neg p) \lor p$    \ \qquad \ \qquad \qquad \qquad  Table 7 Line 1 \\ 
+
+
+\section*{Answer 2}
+a) $ \forall x \exists y \ W(x,y)$ \\
+b) $ \forall x \exists y\ \neg F(x,y)$ \\
+c) $ \forall x\ [W(x,P) \implies A(Ali,x)]$ \\
+d) $ \exists y\ (W(Busra, y) \land  (\exists y \ F(Tubitak, y)) $ \\
+e) $ \exists x \exists y \exists z \ (S(x,y) \land S(x,z)) \land (y\ != z)$ \\
+f) $ \exists x \exists y \exists z \ (W(x,y) \land W(z,y)) \implies (x = z)$ \\
+g) $ \exists x \exists y \exists z \ (W(x,y) \land W(z,y) \land (x\ != z)) \land (\forall t \ (W(q,y) \implies (x = q \ or \ z = q))$ \\ 
+
+
+\section*{Answer 3}
+\begin{table}[H]
+	\centering
+    
+	\begin{tabular}{*6{l}}
+		$1$ & & & $p \implies q$ & \textit{premise} \\
+		
+		$2$ & & & $(q \land (\neg r) \implies s$ & \textit{premise} \\
+		
+		$3$ & & & $\neg s$ & \textit{premise} \\ \cline{2-6}
+		
+		$4$ &\multicolumn{1}{|c}{} & & $p$ &\textit{assumption} &\multicolumn{1}{c|}{} \\ 
+		
+		$5$ &\multicolumn{1}{|c}{} & & $q$ &\textit{$\implies $e $1,4$} &\multicolumn{1}{c|}{} \\ \cline{3-5}
+		
+		$6$ &\multicolumn{1}{|c}{}&\multicolumn{1}{|c}{$$}& $\neg r$ &\multicolumn{1}{l|}{\textit{assumption}}&\multicolumn{1}{c|}{} \\ 
+		
+		$7$ &\multicolumn{1}{|c}{}&\multicolumn{1}{|c}{}& $q \land (\neg r)$ &\multicolumn{1}{l|}{$\land$ i $5,6$}&\multicolumn{1}{c|}{} \\
+		
+		$8$ &\multicolumn{1}{|c}{}&\multicolumn{1}{|c}{}& $s$ & \multicolumn{1}{c|}{$\implies$e $2,7$} &\multicolumn{1}{c|}{} \\  
+		
+		$9$ &\multicolumn{1}{|c}{}&\multicolumn{1}{|c}{}& $\bot$ & \multicolumn{1}{c|}{$\neg$e $3,8$} &\multicolumn{1}{c|}{} \\ \cline{3-5}
+		
+		$10$ &\multicolumn{1}{|c}{} & & $r$ &\textit{$\neg$e $6-9$} &\multicolumn{1}{c|}{} \\  \cline{2-6}
+		
+
+		$11$ & & & $p \implies r$ & \textit{$\implies$i $4,10$} \\
+	
+	\end{tabular}
+\end{table}
+
+\section*{Answer 4}
+
+Ayse: We went to park  $(p)$ \\
+Baris: : If we played hide and seek, then we did not eat candy. $(s \implies (\neg q))$ \\
+Can: If we went to park, then we both ate candy and played games. $(p \implies (q \land r))$ \\
+Duygu: If we played games, then we played hide and seek. $(r \implies s)$ \\
+
+
+
+\begin{table}[H]
+	\centering
+    
+	\begin{tabular}{*6{l}}
+		$1$ & & & $p$ & \textit{premise} \\
+		
+		$2$ & & & $p \implies (q \land r)$ & \textit{premise} \\
+		
+		$3$ & & & $r \implies s$ & \textit{premise} \\ \cline{2-6}
+		
+		$4$ &\multicolumn{1}{|c}{} & & $q$ &\textit{assumption} &\multicolumn{1}{c|}{} \\ 
+		
+		$5$ &\multicolumn{1}{|c}{} & & $q \land r$ &\textit{$\implies $e $2,1$} &\multicolumn{1}{c|}{} \\ %
+		
+		$6$ &\multicolumn{1}{|c}{} & & $r$ &\textit{$\land $e $5,4$} &\multicolumn{1}{c|}{} \\
+		
+		$7$ &\multicolumn{1}{|c}{} & & $s$ &\textit{$\implies $e $3,6$} &\multicolumn{1}{c|}{} \\ \cline{3-5}
+		
+		$8$ &\multicolumn{1}{|c}{}&\multicolumn{1}{|c}{$$}& $s \implies (\neg q)$ &\multicolumn{1}{l|}{\textit{assumption}}&\multicolumn{1}{c|}{} \\ 
+		
+		$9$ &\multicolumn{1}{|c}{}&\multicolumn{1}{|c}{}& $\neg q$ &\multicolumn{1}{l|}{$\implies$ e $8,7$}	&\multicolumn{1}{c|}{} \\
+		
+		$10$ &\multicolumn{1}{|c}{}&\multicolumn{1}{|c}{}& $\bot$ & \multicolumn{1}{c|}{$\neg$i $4,9$} &\multicolumn{1}{c|}{} \\  \cline{3-5}  
+		
+		$$ &\multicolumn{1}{|c}{} & & $$ &\textit{$$} &\multicolumn{1}{c|}{} \\  \cline{2-6}
+		
+		$11$ & & & $\neg (s \implies (\neg q))$ & \textit{$\neg$i $8-10$} \\
+
+		
+		
+		
+
+	
+	\end{tabular}
+\end{table} 
+
+\centerline{We assumed Baris says the truth in the eighth step. However, by applying natural deduction rules we}
+\centerline{obtained that Baris lies because we ended up getting the opposite of what Baris says.}
+
+\section*{Answer 5}
+
+
+\begin{table}[H]
+	\centering
+    
+	\begin{tabular}{*6{l}}
+		$1$ & & & $\forall x \ (P(x) \implies (Q(x) \implies R(x)))$ & \textit{premise} \\
+		
+		$2$ & & & $\exists x \ (P(x))$ & \textit{premise} \\
+		
+		$3$ & & & $\forall x \ (\neg R(x))$ & \textit{premise} \\ \cline{2-6}
+		
+		$4$ &\multicolumn{1}{|c}{$x_0$} & & $P(x_0)$ &\textit{assumption} &\multicolumn{1}{c|}{}\\ 
+		
+		$5$ &\multicolumn{1}{|c}{} & & $P(x_0) \implies (Q(x_0) \implies R(x_0))$ &\textit{$\forall $e $1$} &\multicolumn{1}{c|}{}\\ %
+		
+		$6$ &\multicolumn{1}{|c}{} & & $\neg R(x_0)$ &\textit{$\forall $e $3$} &\multicolumn{1}{c|}{} \\
+		
+		$7$ &\multicolumn{1}{|c}{} & & $Q(x_0) \implies R(x_0)$ &\textit{$\implies $e $5,4$} &\multicolumn{1}{c|}{} \\ \cline{3-5}
+		
+		$8$ &\multicolumn{1}{|c}{}&\multicolumn{1}{|c}{$$}& $Q(x_0)$ &\multicolumn{1}{l|}{\textit{assumption}}&\multicolumn{1}{c|}{} \\ 
+		
+		$9$ &\multicolumn{1}{|c}{}&\multicolumn{1}{|c}{}& $R(x_0)$ &\multicolumn{1}{l|}{$\implies$ e $7,8$}	&\multicolumn{1}{c|}{} \\
+		
+		$10$ &\multicolumn{1}{|c}{}&\multicolumn{1}{|c}{}& $\bot$ & \multicolumn{1}{c|}{$\neg$e $6,9$} &\multicolumn{1}{c|}{} \\  \cline{3-5}
+		
+		$11$ &\multicolumn{1}{|c}{} & & $\neg Q(x_0)$ &\textit{$\neg$i $8-10$} &\multicolumn{1}{c|}{} \\ 
+		
+		$12$ &\multicolumn{1}{|c}{} & & $\exists x \ (\neg Q(x_0))$ &\textit{$\exists$i $11$} &\multicolumn{1}{c|}{} \\ \cline{2-6}
+
+		$13$ & & & $\exists x \ (\neg Q(x))$ & \textit{$\exists$e $ 2,$} \ 4-12 \\
+
+	
+	\end{tabular}
+\end{table}
