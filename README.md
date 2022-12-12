@@ -1,1 +1,1 @@
-# Here are the Metu-Ceng Homeworks that I have done.
+# Here are the Metu-Ceng Take Home Exams that I have done.
