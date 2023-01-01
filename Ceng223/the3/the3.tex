@@ -1,0 +1,148 @@
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{float}
+\usepackage{amsmath}
+
+\usepackage[hmargin=3cm,vmargin=6.0cm]{geometry}
+%\topmargin=0cm
+\topmargin=-2cm
+\addtolength{\textheight}{6.5cm}
+\addtolength{\textwidth}{2.0cm}
+%\setlength{\leftmargin}{-5cm}
+\setlength{\oddsidemargin}{0.0cm}
+\setlength{\evensidemargin}{0.0cm}
+
+%misc libraries goes here
+
+\begin{document}
+
+\section*{Student Information }
+%Write your full name and id number between the colon and newline
+%Put one empty space character after colon and before newline
+Full Name : Doruk Berke Yurtsızoğlu \\
+Id Number : 2522225 \\
+
+% Write your answers below the section tags
+\section*{Answer 1}
+To prove the statement given via using induction, we must observe the $n = 1$ case: \\
+$n = 1$\\
+$6^{2n} - 1$$\implies$$6^{2*1} - 1$ $ = 35$\\
+$35 = 5*7$\\
+Since both 7 and 5 are multipliers of 35, we can conclude that, the statement holds for $n = 1$.\\
+\\
+Now, we are going to assume for $n = k$, $6^{2*n} - 1$ is divisible by both 5 and 7:\\
+$6^{2n} - 1$$\implies$$6^{2*k} - 1$ $ = 7*x$$\implies$$6^{2*k} = 7*x+1$\\
+$6^{2n} - 1$$\implies$$6^{2*k} - 1$ $ = 5*y$$\implies$$6^{2*k} = 5*y+1$\\
+\\
+After the getting the information from th step above, we are ready to look at $n = k+1$ condition:\\
+$6^{2n} - 1$$\implies$$6^{2*(k+1)} - 1$$\implies$$6^{2*k}*6^{2}-1$$\implies$$6^{2*k}*36-1$\\
+We know the results for $6^{2*k}$ from the $n = k$ assumption we made above. That means we can replace $6^{2*k}$ with $6^{2*k} = 7*x+1$ and $6^{2*k} = 5*y+1$.\\
+$6^{2*k}*36-1$$\implies$$(7*x+1) * 36 - 1$ $= (7*36*x) + 36 - 1$$= (7*36*x) + 35$\\
+$6^{2*k}*36-1$$\implies$$(5*y+1) * 36 - 1$ $= (5*36*y) + 36 - 1$$= (5*36*y) + 35$\\
+\\
+If we simplify these equations we will get:\\
+$(7*36*x) + 35$ $= 7*(36*x+5)$\\
+$(5*36*y) + 35$ $= 5*(36*x+7)$\\
+From the final results we found, we can understand that $6^{2*k} - 1$ is also divisible by both 5 and 7, since both 7 and 5 are multipliers of it. Then, induction rule states that $6^{2n} - 1$ is divisible by both 5 and 7  for all $n \in N^{+}$\\
+
+
+\section*{Answer 2}
+To apply strong induction, we need a base step. For this example, we are going to look at $n = 3$ as base step:\\
+$n = 3$\\
+$H_n = 8*H_{n-1} + 8*H_{n-2} + 9*H_{n-3}$$\implies$$H_3 = 8*H_{2} + 8*H_{1} + 9*H_{0}$\\
+$H_3 = 8*H_{2} + 8*H_{1} + 9*H_{0}$ $= 8*7 + 8*5 + 9*1$ $= 105$\\
+$(H_3 = 105) \leq (9^3 = 273)$, so $H_n \leq 9^n$ is true for $n = 3$.\\
+\\
+Next, we are going to look at the inductive step of strong induction.\\
+This time we are going to assume for all $k \in N$ and $k \geq 3$ values, $H_n \leq 9^n$ is true. In addition, we know $H_0, H_1, H_2, H_3$ values. Also, they hold the proposition  $H_n \leq 9^n$ too.\\
+\\
+Then, we can come up with the equation $H_{k+1} = 8*H_{k} + 8*H_{k-1} + 9*H_{k-2}$ because of the assumption we made above which tells us that $H_{k} \leq 9^{k}, H_{k-1} \leq 9^{k-1}, H_{k-2} \leq 9^{k-2}$.\\
+\\
+So, we can build an inequality from the information we have:\\
+$(H_{k+1} = 8*H_{k} + 8*H_{k-1} + 9*H_{k-2})$ $\leq$ $(8*9^{k} + 8*9^{k-1} + 9*9^{k-2})$\\
+$(H_{k+1} = 8*H_{k} + 8*H_{k-1} + 9*H_{k-2})$ $\leq$ $(8*9^{k} + 8*9^{k-1} + 9^{k-1})$\\
+$(H_{k+1} = 8*H_{k} + 8*H_{k-1} + 9*H_{k-2})$ $\leq$ $(8*9^{k} + 9*9^{k-1})$\\
+$(H_{k+1} = 8*H_{k} + 8*H_{k-1} + 9*H_{k-2})$ $\leq$ $(8*9^{k} + 9^{k})$\\
+$(H_{k+1} = 8*H_{k} + 8*H_{k-1} + 9*H_{k-2})$ $\leq$ $(9*9^{k})$\\
+$(H_{k+1} = 8*H_{k} + 8*H_{k-1} + 9*H_{k-2})$ $\leq$ $(9^{k+1})$\\
+$(H_{k+1})$ $\leq$ $(9^{k+1})$\\
+Inductive step is finished. We prooved $H_{k+1}$ $\leq$ $9^{k+1}$ is true.\\
+\\
+In conclusion, by applying strong induction, we found that the proposition $H_n = 8*H_{n-1} + 8*H_{n-2} + 9*H_{n-3}$ holds for all $n \in N$ where $n \geq 3$.
+
+\section*{Answer 3}
+In order to find how many bit strings of 8 contain either 4 consecutive 0s or 4 consecutive 1s, we are going to analyze two different cases. $((1 2 3 4 5 6 7 8) \implies our \ string's \ indexvise \ structure)$\\
+\\
+Firstly, we are going to look at 0000 case:\\
+If a string has a part which is made up from 0000, we can say that this 0000 part can  start from $1^{st},2^{nd},3^{rd},4^{th},5^{th}$ indexes.\\
+\\
+|If 0000 part starts from the $1^{st}$ index, we will have a structure like (0 0 0 0 x x x x). We can replace all x's with either ones or zeros. This means, we will have $2^4$ different combinations for this situation.\\
+|If 0000 part starts from the $2^{nd}$ index, we will have a structure like (1 0 0 0 0 x x x). The first element must be 1 otherwise there is chance for double count some combinations. The remaining x's can be  either ones or zeros. Since we have only three x's this time, the amount of different combinations we will get be $2^3$.\\
+|If 0000 part starts from the $3^{rd}$ index, we will have a structure like (x 1 0 0 0 0 x x). The second element must be 1 otherwise there is chance for double count some combinations. The remaining x's can be  either ones or zeros. Since we have only three x's this time, the amount of different combinations we will get be $2^3$ again.\\
+|We will do the same thing for the staring indexes 4 and 5. So, we will get $2^3$ different combinations from each of them too.\\
+Finally we will have $(2^4 + 2^3 + 2^3 + 2^3 + 2^3$ $= 48)$ different combinations for the 0000 case.\\
+\\
+The second case we will look at is the 1111 case:\\
+If a string has a part which is made up from 1111, we can say that this 1111 part can  start from $1^{st},2^{nd},3^{rd},4^{th},5^{th}$ indexes like we said in the previous case.\\
+\\
+|If 1111 part starts from the $1^{st}$ index, we will have a structure like (1 1 1 1 x x x x). We can replace all x's with either ones or zeros. This means, we will have $2^4$ different combinations for this situation.\\
+|If 1111 part starts from the $2^{nd}$ index, we will have a structure like (0 1 1 1 1 x x x). The first element must be 0 otherwise there is chance for double count some combinations. The remaining x's can be  either ones or zeros. Since we have only three x's this time, the amount of different combinations we will get be $2^3$.\\
+|If 1111 part starts from the $3^{rd}$ index, we will have a structure like (x 0 1 1 1 1 x x). The second element must be 0 otherwise there is chance for double count some combinations. The remaining x's can be  either ones or zeros. Since we have only three x's this time, the amount of different combinations we will get be $2^3$ again.\\
+|We will do the same thing for the staring indexes 4 and 5. So, we will get $2^3$ different combinations from each of them too.\\
+Finally we will have $(2^4 + 2^3 + 2^3 + 2^3 + 2^3$ $= 48)$ different combinations for the 1111 case.\\
+\\
+However, we have counted both 00001111 and 11110000 twice. Therefore, we are going to subtract them from the final result.\\
+\\
+Then, the final result will be $48 + 48 -2$ $= 94$\\
+
+\section*{Answer 4}
+The question wants us to form such a galaxy that has exactly 1 star, 2 habitable planets and 8 nonhabitable planets such that there is at least 6 nonhabitable planets between the 2 habitable ones.\\
+|To begin with, we are going to choose exactly 1 star from 10 different stars. $ {10}\choose {1}$\\
+\\
+|Then, we are going to choose 2 habitable planets out of 20 different planet. $ {20}\choose {2}$\\
+\\
+|After that, we are going to choose 8 nonhabitable planets out of 80 different planet. $ {80}\choose {8}$\\
+\\
+|In addition to all of the things above, the planets can be lined up in 6 different ways. Which are:\\
+Let's say H represents habitable planets and N represents non habitable planets.\\
+H|N|N|N|N|N|N|N|N|H   \\
+N|H|N|N|N|N|N|N|N|H   \\
+H|N|N|N|N|N|N|N|H|N   \\
+N|N|H|N|N|N|N|N|N|H   \\
+H|N|N|N|N|N|N|H|N|N   \\
+N|H|N|N|N|N|N|N|H|N   \\
+\\
+|Also, the habitable and nonhabitable planets can be lined up 2!*8! different ways since they are distinct from each other.\\
+\\
+So, the final answer we will get is $ {10}\choose {1}$$ {20}\choose {2}$$ {80}\choose {8}$$ * 6 * 8! * 2!$\\
+
+\section*{Answer 5}
+\paragraph{a)}
+We know that the robot can go one, two or three cells forward. That means if the robot is at $i^{th}$ cell, it must have moved to there from either $(i-1)^{th}$, $(i-2)^{th}$, $(i-3)^{th}$ cell. Thus, we can form a recursive function where at current position i, the function is recursively called for $(i-1)^{th}$, $(i-2)^{th}$, $(i-3)^{th}$ cell. We can show this as: $f(x) = f(x-1) + f(x-2) + f(x-3)$\\
+\\
+Then, the formula that represents the relation between the cells will be: $a_n = a_{n-1} + a_{n-2} + a_{n-3}$ for $n \geq 4$\\
+
+\paragraph{b)}
+To see that if the formula works, we must know $a_1$, $a_2$ and $a_3$. Then, these three cases must be initial conditions.\\
+\\
+%$a_0$ $= 1$$\implies$Since there is only one way to move 0 cell forward. (not moving)\\ 
+$a_1$ $= 1$$\implies$Since there is only one way to move 1 cell forward. (jumping one cell)\\ 
+$a_2$ $= 2$$\implies$Since there are two ways to move 2 cell forward. (1-1 or 2)\\ 
+$a_3$ $= 4$$\implies$Since there are four ways to move 3 cell forward. (1-1-1, 2-1, 1-2, 3)\\ 
+
+\paragraph{c)}
+In order to find the result, we are going to use the formula we formed in part a.\\
+\\
+We know $a_1$ $= 1$, $a_2$ $= 2$ and $a_3$ $= 4$. We are going to derive the result from these informations.\\
+\\
+$a_9 = a_8 + a_7 + a_6$ = $81 + 44+ 24$ = $149$\\
+$a_8 = a_7 + a_6 + a_5$ = $44 + 24+ 13$ = $81$\\
+$a_7 = a_6 + a_5 + a_4$ = $24 + 13+ 7$ = $44$\\
+$a_6 = a_5 + a_4 + a_3$ = $13 + 7+ 4$ = $24$\\
+$a_5 = a_4 + a_3 + a_2$ = $7 + 4+ 2$ = $13$\\
+$a_4 = a_3 + a_2 + a_1$ = $4 + 2 + 1$ = $7$\\
+%$a_3 = a_2 + a_1 + a_0$ = $2 + 1 + 1$ = $4$\\
+\\
+The answer for this question is $a_9$ = 149.\\
+
+\end{document}
