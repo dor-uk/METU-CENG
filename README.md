@@ -1,4 +1,4 @@
-# Here are the Metu-Ceng Take Home Exams that I have done.
+# Here are the Metu-Ceng Take Home Assignments that I have done.
 - ceng111: INTRODUCTION TO COMPUTER ENG. CONCEPTS
 - ceng140: C PROGRAMMING
 - ceng213: DATA STRUCTURES
