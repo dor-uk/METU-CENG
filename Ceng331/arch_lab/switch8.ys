@@ -1,0 +1,229 @@
+# DORUK BERKE YURTSIZOĞLU 2522225
+.pos 0x0
+	irmovq stack, %rsp  	# Set up stack pointer  
+    irmovq array_begin1, %rdi
+    irmovq array_begin2, %rsi
+    irmovq $16, %rdx
+    call switch8
+    halt
+
+#implement your code below (DO NOT CHANGE/REMOVE THIS COMMENT)
+
+switch8:
+
+# With the implementations I made to this file, I improved the performence of the pipeline implementation from 27.16875 to 21.084375.
+
+# We will assign some constants to unused registers since we dont want to do the same thing over and over again. We will use them directly.
+
+irmovq $8, %r14          # We are using the number 8 in various different lines where we assign 8 to a register. We are assigning the value 8 to a constant register to reduce time.
+irmovq $1, %rcx			 # In cases_over, there is the operation irmovq $1, %r10. We will eliminate this line by assigning the value 1 to a register.
+irmovq $16, %r13		 # In cases_over, there is the operation irmovq $16, %r10. We will eliminate this line by assigning the value 16 to a register.
+irmovq $26, %r12         # In case 6, we first add 10 then add 16 again in the cases_over. Instead of this directly add 26. 
+irmovq $9, %r9			 # In case 4, we first subtract 7 then add 16 again in the cases_over. Instead of this directly add 9. 
+
+loop:
+    andq %rdx, %rdx
+    jle done:
+    
+    mrmovq (%rdi), %r8
+    mrmovq (%rdi), %r11
+    # irmovq $8, %r12
+    modq %r14, %r8       # We deleted the lines below this from the switch8_slow. switch8_slow was looking to the cases one by one.
+    					 # In this approach, we will use jtab instruction which will function as similar to a hash table.
+    
+    mllq %r14, %r8       # %r8 stores the case number, in the table we created we have usud quad which is the size of 8. In order to jump to the desired case, we have multiply the case number with 8.  
+    jtab table, %r8	     # Make the jump
+	
+cases_over:
+    irmovq $16, %r10
+    addq %r10, %r11
+    rmmovq %r11, (%rsi)
+    irmovq $1, %r10
+    subq %r10, %rdx
+    irmovq $8, %r10
+    addq %r10, %rdi 
+    addq %r10, %rsi
+    jmp loop             # switch8_slow implementation uses cases_over by jumping at the end of each case. Instead of making jumps, which has a high cost, we will copy the cases_over to each cases  
+done:
+ret
+
+
+#0 -> add 1
+case0:
+# irmovq $1, %r10        # We don't need this since we assigned this at the initial part, we will use it directly.  
+addq %rcx, %r11
+
+# cases over
+# irmovq $16, %r10		 # We don't need this since we assigned this at the initial part, we will use it directly.  
+addq %r13, %r11
+rmmovq %r11, (%rsi)
+# irmovq $1, %r10		 # We don't need this since we assigned this at the initial part, we will use it directly.  
+subq %rcx, %rdx
+# irmovq $8, %r10		 # We don't need this since we assigned this at the initial part, we will use it directly.  
+addq %r14, %rdi 
+addq %r14, %rsi
+jmp loop
+# jmp cases_over         # Deleted the cases_over jump since we implemented it directly.
+
+#1 -> multiply by 5
+case1:
+irmovq $5, %r10
+mllq %r10, %r11
+
+# cases over
+# irmovq $16, %r10		 # We don't need this since we assigned this at the initial part, we will use it directly.  
+addq %r13, %r11
+rmmovq %r11, (%rsi)
+# irmovq $1, %r10        # We don't need this since we assigned this at the initial part, we will use it directly.  
+subq %rcx, %rdx
+# irmovq $8, %r10        # We don't need this since we assigned this at the initial part, we will use it directly.  
+addq %r14, %rdi 
+addq %r14, %rsi
+jmp loop
+# jmp cases_over
+
+#2 -> divide by 2
+case2:
+irmovq $2, %r10
+dvvq %r10, %r11
+
+# cases over
+# irmovq $16, %r10       # We don't need this since we assigned this at the initial part, we will use it directly.  
+addq %r13, %r11
+rmmovq %r11, (%rsi)
+# irmovq $1, %r10        # We don't need this since we assigned this at the initial part, we will use it directly.  
+subq %rcx, %rdx
+# irmovq $8, %r10        # We don't need this since we assigned this at the initial part, we will use it directly.  
+addq %r14, %rdi 
+addq %r14, %rsi
+jmp loop
+# jmp cases_over
+
+#3 -> take mod 3
+case3:
+irmovq $3, %r10
+modq %r10, %r11
+
+# cases over
+# irmovq $16, %r10       # We don't need this since we assigned this at the initial part, we will use it directly.  
+addq %r13, %r11
+rmmovq %r11, (%rsi)
+# irmovq $1, %r10        # We don't need this since we assigned this at the initial part, we will use it directly.  
+subq %rcx, %rdx
+# irmovq $8, %r10        # We don't need this since we assigned this at the initial part, we will use it directly.  
+addq %r14, %rdi 
+addq %r14, %rsi
+jmp loop
+# jmp cases_over
+
+#4 -> subtract 7
+case4:
+# irmovq $7, %r10		 # Deletion of these lines was explained at the initial part
+# subq %r10, %r11
+
+# cases over
+# irmovq $16, %r10		 # I think you understood the implementation. I will not add any more comment. (Deletion of the lines from cases_over goes on and on..)
+# irmovq $9, %r10
+addq %r9, %r11
+rmmovq %r11, (%rsi)
+# irmovq $1, %r10
+subq %rcx, %rdx
+# irmovq $8, %r10
+addq %r14, %rdi 
+addq %r14, %rsi
+jmp loop
+# jmp cases_over
+
+#5 -> make it 331
+case5:
+irmovq $331, %r11
+
+# cases over
+# irmovq $16, %r10
+addq %r13, %r11
+rmmovq %r11, (%rsi)
+# irmovq $1, %r10
+subq %rcx, %rdx
+# irmovq $8, %r10
+addq %r14, %rdi 
+addq %r14, %rsi
+jmp loop
+# jmp cases_over
+
+#6 -> add 10
+case6:
+# irmovq $10, %r10
+# addq %r10, %r11
+
+# cases over
+# irmovq $16, %r10
+# irmovq $26, %r10
+addq %r12, %r11
+rmmovq %r11, (%rsi)
+# irmovq $1, %r10
+subq %rcx, %rdx
+# irmovq $8, %r10
+addq %r14, %rdi 
+addq %r14, %rsi
+jmp loop
+# jmp cases_over
+
+#7 -> divide by 3
+case7:
+irmovq $3, %r10
+dvvq %r10, %r11
+
+# cases over
+# irmovq $16, %r10
+addq %r13, %r11
+rmmovq %r11, (%rsi)
+# irmovq $1, %r10
+subq %rcx, %rdx
+# irmovq $8, %r10
+addq %r14, %rdi 
+addq %r14, %rsi
+jmp loop
+# jmp cases_over
+
+table:
+	.quad case0
+	.quad case1
+	.quad case2
+	.quad case3
+	.quad case4
+	.quad case5
+	.quad case6
+	.quad case7
+
+
+
+#implement your code above (DO NOT CHANGE/REMOVE THIS COMMENT)
+
+.pos 0x1008
+array_begin1:
+    .quad 0
+    .quad 1
+    .quad 2
+    .quad 3
+    .quad 4
+    .quad 5
+    .quad 6
+    .quad 7
+    .quad 8
+    .quad 9
+    .quad 10
+    .quad 11
+    .quad 12
+    .quad 13
+    .quad 14
+    .quad 15
+array_end1:
+    .quad 0
+.pos 0x1500
+array_begin2:
+    .quad 0
+.pos 0x1F00
+stack:
+    .quad 0
+
+

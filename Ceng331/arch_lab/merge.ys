@@ -1,0 +1,104 @@
+# DORUK BERKE YURTSIZOGLU 2522225
+.pos 0x0
+init:
+    irmovq stack, %rsp
+    irmovq array_begin1, %rdi
+    irmovq array_end1, %rsi
+    irmovq array_begin2, %rdx
+    irmovq array_end2, %rcx
+    irmovq array_begin3, %r8
+    call merge
+    halt
+
+#implement your code below (DO NOT CHANGE/REMOVE THIS COMMENT)
+
+merge:
+
+L1:
+    rrmovq %rsi, %r11
+    subq %rdi, %r11
+    jle L3
+
+    rrmovq %rcx, %r9
+    subq %rdx, %r9
+    jle L2
+
+    mrmovq (%rdi), %r10
+    mrmovq (%rdx), %r11
+    rrmovq %r11, %r12
+    subq %r10, %r12
+    jg condition
+
+    mrmovq (%rdx), %r10
+    rmmovq %r10,(%r8)
+    irmovq $8, %r13
+    addq %r13, %rdx
+    addq %r13, %r8
+    jmp L1
+
+condition:
+    mrmovq (%rdi), %r10
+    rmmovq %r10,(%r8)
+    irmovq $8, %r13
+    addq %r13, %rdi
+    addq %r13, %r8
+    jmp L1
+
+L2:
+    rrmovq %rsi, %r11
+    subq %rdi, %r11
+    jle finish
+
+    mrmovq (%rdi), %r10
+    rmmovq %r10,(%r8)
+    irmovq $8, %r13
+    addq %r13, %rdi
+    addq %r13, %r8
+    jmp L2
+
+L3:
+    rrmovq %rcx, %r9
+    subq %rdx, %r9
+    jle finish
+
+    mrmovq (%rdx), %r10
+    rmmovq %r10,(%r8)
+    irmovq $8, %r13
+    addq %r13, %rdx
+    addq %r13, %r8
+    jmp L3
+
+
+finish:
+    ret
+#implement your code above (DO NOT CHANGE/REMOVE THIS COMMENT)
+
+.pos 0x1008
+array_begin1:
+    .quad 1
+    .quad 2
+    .quad 3
+    .quad 5
+    .quad 17
+    .quad 18
+    .quad 19
+    .quad 110
+array_end1:
+    .quad 0
+array_begin2:
+    .quad 10
+    .quad 11
+    .quad 12
+    .quad 200
+    .quad 201
+    .quad 202
+    .quad 203
+    .quad 204
+array_end2:
+    .quad 0
+.pos 0x1500
+array_begin3:
+    .quad 0
+.pos 0x1F00
+stack:
+    .quad 0

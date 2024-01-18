@@ -1,0 +1,88 @@
+# DORUK BERKE YURTSIZOĞLU 2522225
+.pos 0x0
+init:
+    irmovq stack, %rsp
+    irmovq $6, %rdx
+    irmovq array_begin, %rdi
+    irmovq array_end, %rsi
+    call binary_search
+    halt
+
+#implement your code below (DO NOT CHANGE/REMOVE THIS COMMENT)
+
+binary_search:
+
+    rrmovq %rdi, %r10         # *initial_begin = begin; ??
+    rrmovq %rdi, %r11         # copy beginning of the array
+    rrmovq %rsi, %r12         # copy end of the array
+
+loop_control:
+
+    subq %r11, %r12           # while (begin < end)
+    jle finish
+
+loop:
+
+    irmovq $2 , %r13
+    dvvq %r13, %r12           # ((end - begin) / 2);
+    irmovq $8, %r9
+    rrmovq %r12, %r14
+    modq %r9, %r14
+    subq %r14, %r12
+    addq %r11, %r12           # begin + ((end - begin) / 2);
+    rrmovq %r12, %rcx         # mid =
+
+    rrmovq %rdx, %r9
+    mrmovq (%rcx), %r13
+    subq %r13, %r9
+    je    found                  # if (*mid == value
+
+    rrmovq %rdx, %r9
+    mrmovq (%rcx), %r13
+    subq %r13, %r9
+    jg go_right               # else if (*mid < value)
+
+    rrmovq %rcx, %r12         # else end = mid;
+    jmp loop_control
+
+go_right:
+# DORUK BERKE YURTSIZOĞLU 2522225
+    irmovq $8, %r13
+    addq %r13, %rcx
+    rrmovq %rcx, %r11
+    rrmovq %rsi, %r12 
+    jmp loop_control          # begin = mid + 1;
+
+found:
+
+    subq %r10, %rcx
+    irmovq $8 , %r13
+    dvvq %r13, %rcx
+    irmovq $1, %r13
+    addq %r13, %rcx
+    rrmovq %rcx, %rax         # return mid - initial_begin + 1;
+    ret
+
+
+finish:
+
+    irmovq $-1, %rax
+    ret
+
+#implement your code above (DO NOT CHANGE/REMOVE THIS COMMENT)
+
+.pos 0x1008
+array_begin:
+    .quad 1
+    .quad 2
+    .quad 3
+    .quad 5
+    .quad 6
+    .quad 7
+    .quad 9
+    .quad 11
+array_end:
+    .quad 0
+.pos 0x1F00
+stack:
+    .quad 0
