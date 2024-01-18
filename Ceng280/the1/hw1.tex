@@ -1,0 +1,129 @@
+\documentclass[12pt]{article}
+%\usepackage{alltt}
+\usepackage[utf8]{inputenc}
+\usepackage[dvips]{graphicx}
+%\usepackage{a4wide}
+\usepackage{epsfig}
+\usepackage{fancybox}
+\usepackage{verbatim}
+\usepackage{array}
+\usepackage{latexsym}
+\usepackage{alltt}
+%\usepackage{dsfont}
+\usepackage{caption}
+\usepackage{subcaption}
+%\usepackage{fullpage}
+\usepackage{hyperref}
+\usepackage{textcomp}
+\usepackage{listings}
+\usepackage{color}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{tikz}
+\usepackage{float}
+
+
+\usepackage[hmargin=3cm,vmargin=6.0cm]{geometry}
+%\topmargin=0cm
+\topmargin=-2cm
+\addtolength{\textheight}{6.5cm}
+\addtolength{\textwidth}{2.0cm}
+%\setlength{\leftmargin}{-5cm}
+\setlength{\oddsidemargin}{0.0cm}
+\setlength{\evensidemargin}{0.0cm}
+
+%misc libraries goes here
+
+
+
+\begin{document}
+
+\section*{Student Information } 
+%Write your full name and id number between the colon and newline
+%Put one empty space character after colon and before newline
+Full Name :  Doruk Berke Yurtsızoğlu\\
+Id Number :  2522225\\
+
+% Write your answers below the section tags
+
+\section*{Answer 1}
+
+\subsection*{a) All real numbers can be represented as strings over the alphabet $\sum$ = (0, 1, 2, . . . , 9).} 
+
+	$-$ False. The kleene star of an alphabet is the set of strings that produced by 0 or more strings from that alphabet. Since the alphabet $\sum$ = (0, 1, 2, . . . , 9) is a finite set, the strings we can produce from it will also be finite. However, real numbers set is infinite. So, there is not enough elements to represent real numbers using the alphabet $\sum$ = (0, 1, 2, . . . , 9).
+
+
+\subsection*{b) All languages are finitely representable.}
+
+	$-$ False. The number of languages over an alphabet is uncountable. This means, we can't represent all of the languages over an alphabet finitely. 
+
+
+\subsection*{c) $bba \in L$ = $a^{*}b^{*}a^{*}b^{*}$}
+
+	$-$ True. If we use zero strings from the first $a^{*}$, two 'b' strings from the first $b^{*}$, one 'a' string from the second $b^{*}$ we can get bba. So, it is true that $bba \in L$ = $a^{*}b^{*}a^{*}b^{*}$.
+
+\subsection*{d) $a^{+}b^{+}(a \cup b)^{*}$ represents the set of all strings over (a, b) that has ab as prefix.}
+
+	$-$ False. $L^+$ of a language $L$ is the set of strings that can be obtained by concatenating 1 or more strings from $L$, $(L^+ = LL^*)$. So, we can write $a^{+}b^{+}(a \cup b)^{*}$ as $aa^{*}bb^{*}(a \cup b)^{*}$. In this expression, there can be strings like 'aaba' etc. which don't have ab as prefix. So, the proposition is false.
+
+\section*{Answer 2}
+
+\subsection*{a) Formally define the DFA as a quintuple M = {K, $\sum$, $\delta$, s, F}. Give each of K, $\sum$, $\delta$, s, F.} 
+
+	$-$K: $(q_0, q_1, q_2, q_3)$ \\
+	$-$$\sum$: $(a,b)$ \\
+	$-$s: $(q_0)$ \\
+	$-$F: $(q_0, q_1, q_2)$ \\
+	$-$$\delta$: $\delta(q_0,b) = q_0$, $\delta(q_0,a) = q_1$, $\delta(q_1,b) = q_2$, $\delta(q_1,a) = q_1$, $\delta(q_2,b) = q_0$, $\delta(q_2,a) = q_3$, $\delta(q_3,b) = q_3$, $\delta(q_3,a) = q_3$
+
+%\begin{figure}[H]
+	%\centering
+	%\begin{tikzpicture}
+	
+	%\node[shape=circle,draw=black] ($q_0$) at (0, 4)     {\textbf{$q_0$}};
+	%\node[shape=circle,draw=black] ($q_1$) at (4, 4)     {\textbf{$q_1$}};
+	%\node[shape=circle,draw=black] ($q_2$) at (8, 4)     {\textbf{$q_2$}};
+	%\node[shape=circle,draw=black] ($q_3$) at (12, 4)     {\textbf{$q_3$}};
+	
+	
+	
+	%\path[-, thick] (c) edge (d);
+	%\path[-, thick] (a) edge (b);
+	%\path[-, thick] (a) edge (c);
+	%\path[-, thick] (b) edge (e);
+	
+	%\end{tikzpicture} 
+	
+%\end{figure}
+
+\subsection*{b) For this DFA trace the input abbaabab and write the computation. Does the DFA accept the input ?}
+
+$(q_0,abbaabab) \vdash_M (q_1,bbaabab) \vdash_M (q_2,baabab) \vdash_M (q_0,aabab) \vdash_M (q_1,abab) \vdash_M (q_1,bab) \vdash_M (q_2,ab) \vdash_M (q_3,b) \vdash_M (q_3,e)$ \\
+\\
+$-$ $q_3$ is not a final state of this automata, so the string 'abbaabab' is not acceptable by the automata.
+
+\section*{Answer 3}
+
+\subsection*{a) Consider the NFA M = {K, $\sum$, $\delta$, s, F}. For each state $q \in K$ calculate $E(q)$ } 
+
+$-$ E(q): Set of all states of M that are reachable from state q without reading any input. For this NFA; \\
+\\
+$-$ $E(q_0) = (q_0, q_2)$\\
+$-$ $E(q_1) = (q_1)$\\
+$-$ $E(q_2) = (q_2)$\\
+$-$ $E(q_3) = (q_0, q_2, q_3)$\\
+$-$ $E(q_4) = (q_0, q_2, q_3, q_4)$\\
+
+\subsection*{b) The following is a set of instructions to convert an NFA M into a DFA M'. It is
+known that M does not have any empty transitions from its starting state. Identify in which steps the
+instructions go astray. State your reasons and correct the steps. } 
+
+$-$ Step 1 is correct. \\
+$-$ Step 2 is correct. \\
+$-$ Step 3 is correct. \\
+$-$ Step 4 is not correct. The set of final states (F') will consist of all those subsets of K that contain at least one final state of M. \\
+$-$ Step 5 is not correct. The transition function $\delta$ as taking two inputs: an element Q of K' and an element of a of
+$\sum$'. The function returns the union of sets which are E(p) that p in K for which there exists a q $\in$ Q and (q, a, p) $\in \Delta$ . \\
+
+
+\end{document}
