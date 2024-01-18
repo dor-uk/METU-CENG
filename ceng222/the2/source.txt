@@ -1,0 +1,72 @@
+%% My Code
+part_a()
+part_b()
+part_c()
+
+function [] = part_a()
+    mean = 175;
+    std_deviation = 7;
+    N = 1000;
+    heights_db = normrnd(mean, std_deviation, N, 1);
+    
+    figure
+    histogram(heights_db);
+    xlabel('Height (cm)', 'FontSize', 11);
+    ylabel('Amount of people', 'FontSize', 11);
+    title('Distribution of Heights')
+end
+
+
+function [] = part_b()
+    x = linspace(130, 220, 1000);
+    mean = 175;
+    pdf6 = normpdf(x, mean, 6);
+    pdf7 = normpdf(x, mean, 7);
+    pdf8 = normpdf(x, mean, 8);
+    
+    figure
+    plot(x, pdf6, 'LineWidth', 1.5)
+    hold on
+    plot(x, pdf7, 'LineWidth', 1.5)
+    plot(x, pdf8, 'LineWidth', 1.5)
+    xlabel('Height (cm)', 'FontSize', 11)
+    ylabel('Probability Density', 'FontSize', 11)
+    title('PDF for Different Values of Standard Deviation', 'FontSize', 11);
+    legend('\sigma = 6', '\sigma = 7', '\sigma = 8')
+end
+
+function [] = part_c()
+    % Define variables
+    mean = 175;
+    std_dev = 7;
+    sample_size = 150;
+    
+    l_bound = 170;
+    u_bound = 180;
+    
+    N = 1000;
+    proportion_vec = [0.45, 0.50, 0.55];
+    num_props = length(proportion_vec);
+    success_counts = zeros(1, num_props);
+    
+    % Simulate experiments
+    for i = 1:N
+        sample_data = normrnd(mean, std_dev, sample_size, 1);
+        
+        % Check how many samples lie within the bounds
+        num_within_bounds = sum(sample_data > l_bound & sample_data < u_bound);
+        
+        % Check if proportion of samples within bounds exceeds threshold
+        for j = 1:num_props
+            if num_within_bounds / sample_size >= proportion_vec(j)
+                success_counts(j) = success_counts(j) + 1;
+            end
+        end
+    end
+    
+    % Compute probabilities and print results
+    success_probs = success_counts / N;
+    for j = 1:num_props
+        disp(['Probability of at least %' num2str(proportion_vec(j)*100) ' of adults with heights between 170 and 180: ' num2str(success_probs(j))]);
+    end
+end
